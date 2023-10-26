@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fake News or Not?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="./js/app.js"></script>
+
+</head>
+
+<body>
+
+    <div id="start-screen" class="screen">
+        <h1>Fake News or Not?</h1>
+        <p>Click 'Start' to begin. You have to decide if the headline is real or fake.</p>
+        <button id="start-button">Start</button>
+    </div>
+    <div id="game-screen" class="screen">
+        <h2>Is this headline real or fake?</h2>
+        <p id="headline"></p>
+        <div id="buttons">
+            <button id="real-button" class="option-button">Real</button>
+            <button id="fake-button" class="option-button">Fake</button>
+        </div>
+        <p id="score">Score: 0</p>
+    </div>
+    <div id="end-screen" class="screen">
+        <h2>Game Over</h2>
+        <p>Your score: <span id="final-score">0</span></p>
+        <button id="play-again-button">Play Again</button>
+    </div>
+    
+</body>
+</html>
