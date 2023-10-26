@@ -1,4 +1,4 @@
-const NEWS_API_KEY = '21ed4b1c47204c5eab8ec268c69d3549';
+const apikey = '21ed4b1c47204c5eab8ec268c69d3549';
 
 const startButton = document.getElementById("start-button");
 const realButton = document.getElementById("real-button");
@@ -19,6 +19,7 @@ realButton.addEventListener("click", () => checkAnswer(true));
 fakeButton.addEventListener("click", () => checkAnswer(false));
 playAgainButton.addEventListener("click", resetGame);
 
+// game functions
 function startGame() {
     document.getElementById("start-screen").style.display = "none";
     document.getElementById("game-screen").style.display = "block";
@@ -34,25 +35,24 @@ function checkAnswer(isReal) {
     nextRound();
 }
 
-
 async function fetchRealHeadlines() {
-    try {
-        const response = await fetch(
-            `https://newsapi.org/v2/top-headlines?country=us&apiKey=${NEWS_API_KEY}`
-        );
-        const data = await response.json();
-        const articles = data.articles;
-        if (articles.length > 0) {
-            return articles
-                .map(article => ({
-                    isReal: true,
-                    text: article.title
-                }))
-        }
-    } catch (error) {
-        console.error("Failed to fetch real headlines:", error);
+    const categories = ['business', 'technology', 'health', 'entertainment', 'science'];
+    const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+
+    const response = await fetch(
+        `https://newsapi.org/v2/top-headlines?country=us&category=${randomCategory}&apiKey=${apikey}`
+    );
+
+    const data = await response.json();
+    const articles = data.articles;
+    if (articles.length > 0) {
+        return articles.map(article => {
+            return {
+                isReal: true,
+                text: article.title
+            };
+        });
     }
-    return null;
 }
 
 function generateFakeHeadline() {
@@ -118,8 +118,10 @@ async function nextRound() {
 function endGame() {
     document.getElementById("game-screen").style.display = "none";
     endScreen.style.display = "block";
-    finalScore.textContent = score;
+    const percentage = (score / 20) * 100;
+    finalScore.textContent = `${score} out of 20 (${percentage}%)`;
 }
+
 
 function resetGame() {
     score = 0;
