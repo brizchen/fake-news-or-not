@@ -4,7 +4,7 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
-    background-image: url('/assets/newspaper-bg.jpeg');
+    background-image: url('../assets/newspaper-bg.jpeg');
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
