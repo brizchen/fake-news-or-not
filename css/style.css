@@ -5,7 +5,8 @@ body {
     margin: 0;
     padding: 0;
     background-image: url('/assets/newspaper-bg.jpeg');
-    background-size: cover;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 
 .screen {
@@ -19,8 +20,13 @@ body {
     border-radius: 5px;
 }
 
-#start-screen, #game-screen, #end-screen {
+#start-screen {
     display: block;
+    padding: 5%;
+}
+
+#game-screen, #end-screen {
+    display: none;
     padding: 5%;
 }
 
