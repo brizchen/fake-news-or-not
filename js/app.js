@@ -13,6 +13,7 @@ let score = 0;
 let rounds = 0;
 let currentHeadline = null;
 const usedHeadlines = new Set();
+let shuffledHeadlines = [];
 
 startButton.addEventListener("click", startGame);
 realButton.addEventListener("click", () => checkAnswer(true));
@@ -27,12 +28,29 @@ function startGame() {
 }
 
 function checkAnswer(isReal) {
-    if ((isReal && currentHeadline.isReal) || (!isReal && !currentHeadline.isReal)) {
+    let isCorrect = (isReal && currentHeadline.isReal) || (!isReal && !currentHeadline.isReal);
+
+    if (isCorrect) {
         score++;
+        scoreElement.textContent = "Score: " + score;
+
+        scoreElement.classList.add("correct-feedback");
+    } else {
+        scoreElement.classList.add("incorrect-feedback");
     }
-    rounds++;
-    scoreElement.textContent = "Score: " + score;
-    nextRound();
+
+    realButton.disabled = true;
+    fakeButton.disabled = true;
+
+    setTimeout(() => {
+        scoreElement.classList.remove("correct-feedback");
+        scoreElement.classList.remove("incorrect-feedback");
+
+        realButton.disabled = false;
+        fakeButton.disabled = false;
+
+        nextRound();
+    }, 1000);
 }
 
 async function fetchRealHeadlines() {
@@ -134,23 +152,39 @@ function generateFakeHeadline() {
 }
 
 async function nextRound() {
-    if (rounds < 20) {
-        const realHeadlines = await fetchRealHeadlines();
-        if (realHeadlines) {
-            const filteredHeadlines = realHeadlines.filter(headline => !usedHeadlines.has(headline.text) && headline.text !== "[Removed]");
-            if (filteredHeadlines.length > 0) {
-                const headlines = [...filteredHeadlines, generateFakeHeadline()];
-                const randomIndex = Math.floor(Math.random() * headlines.length);
-                currentHeadline = headlines[randomIndex];
-                usedHeadlines.add(currentHeadline.text);
-                headlineElement.textContent = currentHeadline.text;
-            } else {
-                nextRound();
+    rounds++;
+    if (rounds <= 20) {
+        if (shuffledHeadlines.length === 0) {
+            const realHeadlines = await fetchRealHeadlines();
+            if (realHeadlines) {
+                const filteredHeadlines = realHeadlines.filter(
+                    (headline) =>
+                        !usedHeadlines.has(headline.text) && headline.text !== "[Removed]"
+                );
+
+                for (let i = 0; i < filteredHeadlines.length; i++) {
+                    shuffledHeadlines.push(filteredHeadlines[i]);
+                    shuffledHeadlines.push(generateFakeHeadline());
+                }
+
+                shuffledHeadlines = shuffleArray(shuffledHeadlines);
             }
         }
+
+        currentHeadline = shuffledHeadlines.pop();
+        usedHeadlines.add(currentHeadline.text);
+        headlineElement.textContent = currentHeadline.text;
     } else {
         endGame();
     }
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }
 
 function endGame() {

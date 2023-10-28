@@ -22,12 +22,20 @@ body {
 
 #start-screen {
     display: block;
-    padding: 5%;
+    padding: 2%;
 }
 
 #game-screen, #end-screen {
     display: none;
-    padding: 5%;
+    padding: 2%;
+}
+
+#headline-container {
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
 h1, h2 {
@@ -35,7 +43,7 @@ h1, h2 {
     font-size: 28px;
     color: #000;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 p {
@@ -55,6 +63,10 @@ button {
     border-radius: 5px;
 }
 
+.option-button {
+    margin: 0 10px;
+}
+
 .button-clicked {
     background-color: #222;
     transform: scale(1.05);
@@ -64,7 +76,6 @@ button {
 #score {
     font-family: 'Old Standard TT', 'serif';
     font-size: 24px;
-    color: #000;
     margin-top: 20px;
 }
 
@@ -86,4 +97,14 @@ button {
 #play-again-button:hover {
     background-color: #222;
     transition: background-color 0.2s;
+}
+
+.correct-feedback {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.incorrect-feedback {
+    color: #f44336;
+    font-weight: bold;
 }
