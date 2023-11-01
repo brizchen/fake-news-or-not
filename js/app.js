@@ -14,6 +14,8 @@ let rounds = 0;
 let currentHeadline = null;
 const usedHeadlines = new Set();
 let shuffledHeadlines = [];
+let progressBar = document.getElementById("progress-bar");
+const maxRounds = 20;
 
 startButton.addEventListener("click", startGame);
 realButton.addEventListener("click", () => checkAnswer(true));
@@ -174,6 +176,9 @@ async function nextRound() {
         currentHeadline = shuffledHeadlines.pop();
         usedHeadlines.add(currentHeadline.text);
         headlineElement.textContent = currentHeadline.text;
+
+        progressBar.style.width = ((rounds / maxRounds) * 100) + "%";
+            
     } else {
         endGame();
     }
@@ -200,6 +205,7 @@ function resetGame() {
     rounds = 0;
     scoreElement.textContent = "Score: " + score;
     usedHeadlines.clear();
+    progressBar.style.width = "0";
     document.getElementById("end-screen").style.display = "none";
     document.getElementById("start-screen").style.display = "block";
 }

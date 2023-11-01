@@ -108,3 +108,18 @@ button {
     color: #f44336;
     font-weight: bold;
 }
+
+#progress-tracker {
+    width: 100%;
+    height: 20px;
+    background-color: #ccc;
+    margin-top: 10px;
+    position: relative;
+}
+
+#progress-bar {
+    width: 0;
+    height: 100%;
+    background-color: black;
+    position: absolute;
+}
