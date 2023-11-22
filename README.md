@@ -8,4 +8,4 @@ How easy is it to create misinformation in a world where humans are relying more
 # Code Resources
 I used the external **API NewsAPI** (https://newsapi.org/) to generate real news headlines for the app. No open-source code was imported and/or changed.
 
-The fake headlines were generated via ChatGPT, creating a dataset of ~500 AI-generated headlines. The ones that were most similar to the real-world headline dataset were used in the implementation of this app.
+The fake headlines were generated via ChatGPT (https://chat.openai.com/), creating a dataset of ~500 AI-generated headlines. The ones that were most similar to the real-world headline dataset were used in the implementation of this app.
