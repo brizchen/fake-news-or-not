@@ -1,3 +1,7 @@
+Deployed website: https://brizchen.github.io/fake-news-or-not/
+
+Repository link: https://github.com/brizchen/fake-news-or-not/
+
 # Fake News or Not?
 How easy is it to create misinformation in a world where humans are relying more on artificial intelligence? This website is an interactive game that aims to educate users about this topic. It also aims to convey that when training machine-learning algorithms, it's becoming more difficult to distinguish real between fake, making it more difficult to control the spread of misinformation in the digital news space.
  
